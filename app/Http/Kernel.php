@@ -43,7 +43,6 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
-            // \Illuminate\Session\Middleware\AuthenticateSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
@@ -57,48 +56,10 @@ class Kernel extends HttpKernel
             RequestLog::class,
         ],
 
-        // developer 开发总后台接口中间件
-        'developer' => [
-            DeveloperLoginFilter::class,
-        ],
-
         // admin 后台接口中间件
         'admin' => [
             AdminLoginFilter::class,
             AdminPermissionAuthenticate::class,
-        ],
-
-        // 运营中心后台接口中间件
-        'oper' => [
-            OperLoginFilter::class
-        ],
-
-        // merchant 商家后台接口中间件
-        'merchant' => [
-            MerchantLoginFilter::class
-        ],
-
-        // user 用户端(小程序)接口中间件
-        'user' => [
-            MockMiniprogramEnv::class,
-            CurrentOperInjector::class,
-            UserOpenIdInjector::class,
-            UserInfoInjector::class,
-        ],
-
-        // user_app 用户端(App)接口中间件
-        'user_app' => [
-            \App\Http\Middleware\UserApp\UserInfoInjector::class,
-        ],
-
-        // user_app 用户端(App)接口中间件
-        'bizer' => [
-            \App\Http\Middleware\Bizer\BizerLoginFilter::class,
-        ],
-
-        'merchant_app' => [
-            MerchantInfoInjector::class,
-            MerchantAppLoginFilter::class,
         ],
     ];
 

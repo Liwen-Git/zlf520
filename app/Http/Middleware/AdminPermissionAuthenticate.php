@@ -8,7 +8,6 @@
 
 namespace App\Http\Middleware;
 use App\Exceptions\NoPermissionException;
-use App\Modules\Admin\AdminUser;
 use Closure;
 use Illuminate\Support\Str;
 
