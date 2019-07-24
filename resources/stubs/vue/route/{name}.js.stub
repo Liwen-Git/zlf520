@@ -1,0 +1,16 @@
+
+import Home from '../components/home'
+import {studlyName}List from '../components/{name}/list.vue'
+
+/**
+ * category 模块
+ */
+export default [
+    {
+        path: '/',
+        component: Home,
+        children: [
+            {path: '{listApi}', component: {studlyName}List, name: '{studlyName}List'},
+        ]
+    },
+];

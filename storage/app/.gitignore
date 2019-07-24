@@ -1,0 +1,5 @@
+*
+!public/
+!wxPayCert/platform/
+!help-doc/
+!.gitignore
