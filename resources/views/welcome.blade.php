@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>李子园</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -93,6 +93,9 @@
                     <a href="https://forge.laravel.com">Forge</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
                 </div>
+            </div>
+            <div style="position: absolute; bottom: 0px;">
+                <a href="http://www.beian.miit.gov.cn/" style="text-decoration: none">粤ICP备19082463号</a>
             </div>
         </div>
     </body>
