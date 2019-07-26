@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 
 /*
 |--------------------------------------------------------------------------
-| Model Factories
+| BaseModel Factories
 |--------------------------------------------------------------------------
 |
 | This directory should contain each of the model factory definitions for
