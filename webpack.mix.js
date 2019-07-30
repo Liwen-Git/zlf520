@@ -1,4 +1,4 @@
-const mix = require('laravel-mix');
+let mix = require('laravel-mix');
 
 /*
  |--------------------------------------------------------------------------
@@ -7,9 +7,36 @@ const mix = require('laravel-mix');
  |
  | Mix provides a clean, fluent API for defining some Webpack build steps
  | for your Laravel application. By default, we are compiling the Sass
- | file for the application as well as bundling up all the JS files.
+ | file for your application, as well as bundling up your JS files.
  |
  */
 
-mix.js('resources/components/app.components', 'public/components')
-   .sass('resources/sass/app.scss', 'public/css');
+mix.setPublicPath('public');
+
+mix.js('./resources/admin/app.js', 'public/js/admin.js');
+
+mix.styles([
+    'node_modules/element-ui/lib/theme-chalk/index.css', // element-ui 的css样式
+    'node_modules/nprogress/nprogress.css', // 进度条的css样式
+    'resources/assets/css/base.css', // 通用样式
+    'resources/assets/css/global.css', // 通用样式
+], 'public/css/all.css');
+
+mix.copy('node_modules/element-ui/lib/theme-chalk/fonts', 'public/css/fonts/');
+
+mix.extract([
+    'axios',
+    'lockr',
+    'lodash',
+    'vue',
+    'vue-router',
+    'element-ui',
+]);
+
+mix.options({
+    postCss: [
+        require('autoprefixer'),
+    ],
+})
+
+mix.version();

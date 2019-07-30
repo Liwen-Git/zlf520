@@ -1,14 +1,39 @@
-window._ = require('lodash');
+/**
+ * 引入 lodash工具 js原生库
+ */
+import _ from 'lodash';
+window._ = _;
 
 /**
- * We'll load the axios HTTP library which allows us to easily issue requests
- * to our Laravel back-end. This library automatically handles sending the
- * CSRF token as a header based on the value of the "XSRF" token cookie.
+ * 引入 JavaScript 日期处理类库
  */
+import moment from 'moment';
+window.moment = moment;
 
-window.axios = require('axios/index');
+/**
+ * 引入 cookie插件
+ */
+import Cookies from 'js-cookie';
+window.Cookies = Cookies;
 
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+/**
+ * 引入 lockr并全局挂载; [本地存储localStorage的最小API]
+ */
+import Lockr from 'lockr';
+window.Lockr = Lockr;
+// 设置Lockr前缀
+Lockr.prefix = 'admin_';
+
+/**
+ * 引入 axios; 一个基于 promise 的 HTTP 库 [这个axios在assets/js/api.js中封装了一个api，这里的axios没用到]
+ */
+import axios from 'axios';
+window.axios = axios;
+// 修改axios全局默认配置
+axios.defaults.timeout = 1000 * 15;
+axios.defaults.headers.authKey = Lockr.get('authKey');
+axios.defaults.headers.sessionId = Lockr.get('sessionId');
+axios.defaults.headers['Content-Type'] = 'application/json';
 
 /**
  * Next we will register the CSRF Token as a common header with Axios so that
@@ -25,18 +50,8 @@ if (token) {
 }
 
 /**
- * Echo exposes an expressive API for subscribing to channels and listening
- * for events that are broadcast by Laravel. Echo and event broadcasting
- * allows your team to easily build robust real-time web applications.
+ * 如果当前页面在iframe中，就把父页面的url替换成子页面的，跳转到子页面。
  */
-
-// import Echo from 'laravel-echo'
-
-// window.Pusher = require('pusher-components');
-
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: process.env.MIX_PUSHER_APP_KEY,
-//     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-//     encrypted: true
-// });
+if (window.top !== window) {
+    window.top.location = window.location;
+}

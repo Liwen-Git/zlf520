@@ -13,13 +13,20 @@
         "axios": "^0.18",
         "cross-env": "^5.1",
         "laravel-mix": "^4.0.7",
+        "less-loader": "^5.0.0",
         "lodash": "^4.17.5",
         "resolve-url-loader": "^2.3.1",
         "sass": "^1.15.2",
-        "sass-loader": "^7.1.0"
+        "sass-loader": "^7.1.0",
+        "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "babel-polyfill": "^6.26.0",
         "element-ui": "^2.11.1",
+        "js-cookie": "^2.2.0",
+        "less": "^3.9.0",
+        "lockr": "^0.8.5",
+        "moment": "^2.24.0",
         "nprogress": "^0.2.0",
         "vue": "^2.6.10",
         "vue-router": "^3.0.7"
