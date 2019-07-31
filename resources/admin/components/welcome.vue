@@ -1,4 +1,3 @@
-
 <template>
 	<el-row>
 		<el-col :span="8"><div class="grid-content "></div></el-col>

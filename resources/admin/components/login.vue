@@ -28,7 +28,7 @@
             }
             span {
                 vertical-align: text-bottom;
-                font-size: 30px;
+                font-size: 25px;
                 text-transform: uppercase;
                 display: inline-block;
                 color: #fff;
@@ -47,7 +47,7 @@
 
         .verify-img {
             right: 0;
-            height: 34px;
+            height: 38px;
             margin: 1px;
             position: absolute;
         }
@@ -65,7 +65,7 @@
         <transition name="form-fade" mode="in-out">
             <div class="login-panel">
                 <div class="login-logo">
-                    <span>xxxx</span>
+                    <span>for zlf's exclusive use</span>
                 </div>
                 <div class="login-form" v-show="showLogin" v-loading="autoLoginLoading" element-loading-text="自动登录中...">
                     <el-form :model="form" :rules="formRules" ref="form"
@@ -82,9 +82,6 @@
                             <el-input type="text" v-model="form.verifyCode" auto-complete="off" class="w-150"
                                       placeholder="验证码"/>
                             <img class="verify-img" :src="captchaSrc" @click="refreshVerify()" width="150"/>
-                            <div>
-                                <el-checkbox v-model="rememberUsername">记住帐号</el-checkbox>
-                            </div>
                         </el-form-item>
                         <el-form-item>
                             <el-button type="primary" style="width:100%;" v-loading="loading" :disabled="loading"
@@ -95,6 +92,35 @@
                 </div>
             </div>
         </transition>
+        <div>
+            <div id="liwen">
+                <svg height="320" width="320" class="like" id="dianji" onclick="document.getElementById('liwen').classList.toggle('liked')">
+                    <path class="path" d="M 160 145 c 15 -90 170 -20 0 90 m 0 -90 c -15 -90 -170 -20 0 90" fill="white"> <!-- 80 by 70 --></path>
+                </svg>
+
+                <!-- DECORATIONS (quite a lot of them) -->
+                <div class="dot dot-1"></div>
+                <div class="dot dot-2"></div>
+                <div class="dot dot-3"></div>
+                <div class="dot dot-4"></div>
+                <div class="dot dot-5"></div>
+                <div class="dot dot-6"></div>
+                <div class="dot dot-7"></div>
+                <div class="dot dot-8"></div>
+
+                <svg height="40" width="40" viewBox="0 0 320 320" class="h h-1"><path class="path" d="M 160 145 c 15 -90 170 -20 0 90 m 0 -90 c -15 -90 -170 -20 0 90"></path></svg>
+                <svg height="40" width="40" viewBox="0 0 320 320" class="h h-2"><path class="path" d="M 160 145 c 15 -90 170 -20 0 90 m 0 -90 c -15 -90 -170 -20 0 90"></path></svg>
+                <svg height="40" width="40" viewBox="0 0 320 320" class="h h-3"><path class="path" d="M 160 145 c 15 -90 170 -20 0 90 m 0 -90 c -15 -90 -170 -20 0 90"></path></svg>
+                <svg height="40" width="40" viewBox="0 0 320 320" class="h h-4"><path class="path" d="M 160 145 c 15 -90 170 -20 0 90 m 0 -90 c -15 -90 -170 -20 0 90"></path></svg>
+                <svg height="40" width="40" viewBox="0 0 320 320" class="h h-5"><path class="path" d="M 160 145 c 15 -90 170 -20 0 90 m 0 -90 c -15 -90 -170 -20 0 90"></path></svg>
+                <svg height="40" width="40" viewBox="0 0 320 320" class="h h-6"><path class="path" d="M 160 145 c 15 -90 170 -20 0 90 m 0 -90 c -15 -90 -170 -20 0 90"></path></svg>
+                <svg height="40" width="40" viewBox="0 0 320 320" class="h h-7"><path class="path" d="M 160 145 c 15 -90 170 -20 0 90 m 0 -90 c -15 -90 -170 -20 0 90"></path></svg>
+                <svg height="40" width="40" viewBox="0 0 320 320" class="h h-8"><path class="path" d="M 160 145 c 15 -90 170 -20 0 90 m 0 -90 c -15 -90 -170 -20 0 90"></path></svg>
+
+                <svg height="110" width="110" viewBox="0 0 320 320" class="fly fly-1"><path class="path" d="M 160 145 c 15 -90 170 -20 0 90 m 0 -90 c -15 -90 -170 -20 0 90"></path></svg>
+                <svg height="110" width="110" viewBox="0 0 320 320" class="fly fly-2"><path class="path" d="M 160 145 c 15 -90 170 -20 0 90 m 0 -90 c -15 -90 -170 -20 0 90"></path></svg>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -126,7 +152,6 @@
                 loading: false,
                 autoLoginLoading: false,
                 showLogin: false,
-                rememberUsername: true,
             }
         },
         methods: {
@@ -174,33 +199,5 @@
 </script>
 
 <style scoped>
-    .verify-pos {
-        position: absolute;
-        right: 100px;
-        top: 0;
-    }
-
-    .card-box {
-        padding: 20px;
-        /*box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02);*/
-        -webkit-border-radius: 5px;
-        border-radius: 5px;
-        -moz-border-radius: 5px;
-        background-clip: padding-box;
-        background-color: #F9FAFC;
-        margin: 120px auto;
-        width: 400px;
-        border: 2px solid #8492A6;
-    }
-
-    .title {
-        margin: 0 auto 40px auto;
-        text-align: center;
-        color: #505458;
-    }
-
-    .loginform {
-        width: 350px;
-        padding: 35px 35px 15px 35px;
-    }
+    @import "../../assets/css/login_style.css";
 </style>

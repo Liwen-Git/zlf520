@@ -37,5 +37,6 @@ const routes = [
     // 拦截所有无效的页面到错误页面
     { path: '*' , component: ErrorPage, name: 'GlobalErrorPage'}
 
-]
+];
+
 export default routes

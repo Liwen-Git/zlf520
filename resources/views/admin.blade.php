@@ -5,6 +5,7 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>zlf专用</title>
     <link rel="stylesheet" href="{{mix('css/all.css')}}">
@@ -207,13 +208,6 @@
     </style>
 </head>
 <body>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var loader = document.getElementById('bootstrap-loader');
-        loader.parentNode.removeChild(loader);
-    });
-</script>
 
 <div id="app">
 
