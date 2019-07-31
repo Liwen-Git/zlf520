@@ -12,7 +12,7 @@
     .login-panel {
         position: absolute;
         top: 50%;
-        left: 70%;
+        left: 75%;
         margin: -230px 0 0 -100px;
         width: 360px;
         height: 400px;
@@ -38,10 +38,10 @@
     }
     .login-form {
         width: 310px;
-        height: 280px;
-        padding: 45px 25px 25px;
+        /*height: 280px;*/
+        padding: 25px 25px 25px;
         box-shadow: 0 0 100px rgba(0,0,0,.08);
-        background-color: #fff;
+        /*background-color: #fff;*/
         border-radius: 4px;
         z-index: 3;
 
