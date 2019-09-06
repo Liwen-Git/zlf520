@@ -38,6 +38,8 @@ Vue.use(VueRouter);
 import ElementUI from 'element-ui'
 Vue.use(ElementUI);
 
+import store from './store/index'
+
 import page from './components/page'
 Vue.component('page', page);
 
@@ -50,5 +52,6 @@ new Vue({
     el: '#app',
     template: '<App/>',
     router,
+    store,
     components: {App}
 }).$mount('#app');
