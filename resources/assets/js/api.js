@@ -26,9 +26,8 @@ function handlerError(error) {
         if(res && res.code){
             switch (res.code) {
                 case CODE_UN_LOGIN:
-                    Lockr.rm('userInfo');
-                    Lockr.rm('menus');
-                    router.push('/login');
+                    store.dispatch('clearUser')
+                    router.replace('/login');
                     Message.error('您的登录信息已失效, 请先登录');
                     break;
                 default:
@@ -78,7 +77,6 @@ function get(url, params, defaultHandlerRes=true) {
 function post(url, params, defaultHandlerRes=true) {
     let options = {
         headers: {'X-Requested-With': 'XMLHttpRequest'},
-        timeout: 1000 * 30,
     };
     url = getRealUrl(url);
     let promise = axios.post(url, params, options).then(res => {

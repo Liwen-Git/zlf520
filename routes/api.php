@@ -18,8 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('admin')->group(function () {
-    Route::get('test', function () {
-        dump("hello");
+Route::prefix('admin')
+    ->middleware('admin')
+    ->group(function() {
+        Route::post('/login', 'LoginController@login');
     });
-});

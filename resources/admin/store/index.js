@@ -32,8 +32,6 @@ const stateLocalStoragePlugin = function (store) {
     if (state) {
         store.commit('setGlobalLoading', state.globalLoading);
         store.commit('setUser', state.user);
-        store.commit('setMenus', state.menus);
-        store.commit('setRules', state.rules);
     }
 
     store.subscribe((mutation, state) => {
@@ -71,19 +69,14 @@ export default new Vuex.Store({
             context.commit('setGlobalLoading', false);
         },
         // 登录的时候存储 用户、菜单、权限
-        storeUserAndMenus(context, {user, menus, rules, forbiddenRules}) {
-            menus = trimMenuUrlPrefix(menus);
+        storeUser(context, user) {
             Lockr.set('user', user);
             context.commit('setUser', user);
-            context.commit('setMenus', menus);
-            context.commit('setRules', rules);
         },
         // 退出登录
-        clearUserAndMenus(context) {
+        clearUser(context) {
             Lockr.rm('user');
             context.commit('setUser', null);
-            context.commit('setMenus', []);
-            context.commit('setRules', []);
         }
     },
     plugins: [

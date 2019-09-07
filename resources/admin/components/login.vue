@@ -174,6 +174,7 @@
                     if(valid){
                         _self.loading = true;
                         api.post('/login', this.form).then(data => {
+                            this.$store.dispatch('storeUser', data)
                             _self.relocation();
                         }).catch(() => {
                             _self.refreshVerify();

@@ -43,7 +43,7 @@ import store from './store/index'
 import page from './components/page'
 Vue.component('page', page);
 
-window.baseApiUrl = '/api/';
+window.baseApiUrl = '/api/admin/';
 import api from '../assets/js/api'
 window.api = api;
 

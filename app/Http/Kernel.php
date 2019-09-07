@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\LoginFilter;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -43,7 +44,7 @@ class Kernel extends HttpKernel
         ],
 
         'admin' => [
-
+            LoginFilter::class,
         ],
     ];
 
