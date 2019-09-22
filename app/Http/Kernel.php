@@ -39,6 +39,9 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
+            // EncryptCookies 和 StartSession 是captcha验证码验证必须引入的中间价
+            \App\Http\Middleware\EncryptCookies::class,
+            \Illuminate\Session\Middleware\StartSession::class,
             'throttle:60,1',
             'bindings',
         ],

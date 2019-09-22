@@ -22,4 +22,5 @@ Route::prefix('admin')
     ->middleware('admin')
     ->group(function() {
         Route::post('/login', 'LoginController@login');
+        Route::post('/logout', 'LoginController@logout');
     });

@@ -12,6 +12,7 @@ import NProgress from 'nprogress'
 import Vue from 'vue'
 window.Vue = Vue;
 
+// 路由相关
 import routes from './routes/index'
 import VueRouter from 'vue-router'
 const router = new VueRouter({
@@ -38,7 +39,9 @@ Vue.use(VueRouter);
 import ElementUI from 'element-ui'
 Vue.use(ElementUI);
 
+// vuex相关
 import store from './store/index'
+window.store = store;
 
 import page from './components/page'
 Vue.component('page', page);

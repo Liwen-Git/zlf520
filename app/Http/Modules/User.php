@@ -30,5 +30,17 @@ use Illuminate\Support\Carbon;
  */
 class User extends BaseModel
 {
+    use GenPassword;
 
+    /**
+     * @var array
+     * 批量赋值
+     */
+    protected $fillable = ['name'];
+
+    /**
+     * @var array
+     * 隐藏字段
+     */
+    protected $hidden = ['password', 'salt'];
 }

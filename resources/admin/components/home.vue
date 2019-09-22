@@ -1,5 +1,7 @@
 <template>
-    <div>home</div>
+    <div>
+        <router-view></router-view>
+    </div>
 </template>
 
 <script>
@@ -15,6 +17,13 @@
             ...mapState([
                 'user',
             ])
+        },
+        methods: {
+            logout() {
+                api.post('/logout').then(() => {
+
+                })
+            }
         },
         created() {
             // 登录验证

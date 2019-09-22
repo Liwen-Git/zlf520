@@ -12,15 +12,6 @@ const routes = [
 
     {path: '/login', component: Login, name: 'Login'},
 
-    // 权限模块
-    {
-        path: '/',
-        component: Home,
-        children: [
-
-        ]
-    },
-
     {
         path: '/',
         component: Home,
