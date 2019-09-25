@@ -52,7 +52,7 @@
         name: "image-upload",
         props: {
             value: {type: Array|String},
-            action: {type: String, default: '/api/qiniu/upload'},
+            action: {type: String, default: '/api/qiniu/upload/image'},
             width: {type: Number},
             height: {type: Number},
             checkSize: {type: Boolean, default: true},
