@@ -37,7 +37,7 @@
             action() {
                 let dir = this.switchVal ? this.directory1 : this.directory2;
                 let api = '/api/qiniu/upload/image';
-                console.log(`${api}?directory=${dir}`)
+
                 return `${api}?directory=${dir}`;
             }
         }
