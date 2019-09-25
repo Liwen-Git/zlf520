@@ -9,8 +9,8 @@ use Illuminate\Http\Request;
 class LoginFilter
 {
     protected $publicUrls = [
-        'api/admin/login',
-        'api/admin/logout',
+        'api/login',
+        'api/logout',
     ];
 
     /**
