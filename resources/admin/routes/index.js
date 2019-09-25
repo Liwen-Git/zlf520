@@ -4,6 +4,8 @@ import Home from '../components/home.vue'
 import ErrorPage from '../components/404.vue'
 import welcome from '../components/welcome.vue'
 
+// 七牛对象存储
+import QiniuUpload from '../components/qiniu/upload'
 
 /**
  *
@@ -11,6 +13,15 @@ import welcome from '../components/welcome.vue'
 const routes = [
 
     {path: '/login', component: Login, name: 'Login'},
+
+    // 七牛对象存储
+    {
+        path: '/',
+        component: Home,
+        children: [
+            {path: 'qiniu/upload', component: QiniuUpload, name: 'qiniu-upload'},
+        ]
+    },
 
     {
         path: '/',

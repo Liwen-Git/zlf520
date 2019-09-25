@@ -43,10 +43,14 @@ Vue.use(ElementUI);
 import store from './store/index'
 window.store = store;
 
+// 全局引用page
 import page from './components/page'
 Vue.component('page', page);
+// 全局引用image-upload
+import ImageUpload from '../assets/components/image-upload'
+Vue.component('ImageUpload', ImageUpload);
 
-window.baseApiUrl = '/api/admin/';
+window.baseApiUrl = '/api/';
 import api from '../assets/js/api'
 window.api = api;
 

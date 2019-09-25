@@ -18,9 +18,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('admin')
-    ->middleware('admin')
+Route::middleware('admin')
     ->group(function() {
+        // 登录 登出
         Route::post('/login', 'LoginController@login');
         Route::post('/logout', 'LoginController@logout');
+
+        // 七牛
+        Route::post('/qiniu/upload', 'QiNiuController@upload');
     });

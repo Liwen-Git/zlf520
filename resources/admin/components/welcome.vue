@@ -3,7 +3,7 @@
 		<el-col :span="8"><div class="grid-content "></div></el-col>
 		<el-col :span="8">
 			<div class="grid-content ">
-				<h1 >zlf</h1>
+				<h1 >welcome zlf</h1>
 			</div>
 		</el-col>
 		<el-col :span="8"><div class="grid-content "></div></el-col>

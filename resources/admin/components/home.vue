@@ -12,24 +12,24 @@
                             active-text-color="#ffd04b">
                         <el-menu-item index="/welcome"><i class="el-icon-s-home"></i>主页</el-menu-item>
                         <el-submenu index="2">
-                            <template slot="title">我的工作台</template>
-                            <el-menu-item index="2-1">选项1</el-menu-item>
-                            <el-menu-item index="2-2">选项2</el-menu-item>
-                            <el-menu-item index="2-3">选项3</el-menu-item>
-                            <el-submenu index="2-4">
-                                <template slot="title">选项4</template>
-                                <el-menu-item index="2-4-1">选项1</el-menu-item>
-                                <el-menu-item index="2-4-2">选项2</el-menu-item>
-                                <el-menu-item index="2-4-3">选项3</el-menu-item>
-                            </el-submenu>
+                            <template slot="title">七牛对象存储</template>
+                            <el-menu-item index="/qiniu/upload">上传</el-menu-item>
+                            <el-menu-item index="2-2">预览</el-menu-item>
+                        </el-submenu>
+                        <el-submenu :index="user.name" style="float:right;">
+                            <template slot="title">{{user.name}}</template>
+                            <el-menu-item @click="logout">退出</el-menu-item>
                         </el-submenu>
                     </el-menu>
                 </el-header>
                 <el-main>
-                    <el-card shadow="hover">
-                        <router-view></router-view>
-                    </el-card>
+                    <router-view></router-view>
                 </el-main>
+                <el-footer class="home-footer">
+                    <span>© 2018-2019 Powered By</span>
+                    <a href="https://github.com/Liwen-Git" target="_blank">liwen</a> |
+                    <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备19082463号</a>
+                </el-footer>
             </el-container>
         </el-col>
     </el-row>
@@ -51,7 +51,16 @@
         },
         methods: {
             logout() {
-                api.post('/logout').then(() => {
+                this.$confirm('确认退出吗?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消'
+                }).then(() => {
+                    api.post('/logout').then(() => {
+                        this.$message.success('退出成功')
+                    });
+                    this.$store.dispatch('clearUser');
+                    this.$router.replace('/login');
+                }).catch(() => {
 
                 })
             }
@@ -63,6 +72,8 @@
                 this.$router.replace('/login');
                 return;
             }
+            // 刷新 高亮菜单显示
+            this.activeMenu = this.$route.path;
         }
     }
 </script>
@@ -70,5 +81,13 @@
 <style scoped>
     .public-height-hundred {
         height: 100%;
+    }
+    .home-footer {
+        height: 20px !important;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        margin: 5px 0;
+        font-size: 14px;
     }
 </style>
