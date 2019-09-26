@@ -72,6 +72,9 @@
                 this.$router.replace('/login');
                 return;
             }
+            if (this.$route.path == '/') {
+                this.$router.replace('/welcome');
+            }
             // 刷新 高亮菜单显示
             this.activeMenu = this.$route.path;
         }
