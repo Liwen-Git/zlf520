@@ -19,7 +19,7 @@ class ImageController extends Controller
             'directory' => request('directory'),
             'type' => request('type', 1),
             'startTime' => request('start_time') ? date('Y-m-d 00:00:00', strtotime(request('start_time'))) : '',
-            'endTime' => request('end_time') ? date('Y-m-d 00:00:00', strtotime(request('end_time'))) : '',
+            'endTime' => request('end_time') ? date('Y-m-d 23:59:59', strtotime(request('end_time'))) : '',
             'pageSize' => request('page_size'),
         ];
         $data = ImageService::list($param);
