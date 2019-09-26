@@ -4,7 +4,7 @@
             <el-card>
                 <el-form ref="form" :model="formData" size="small" inline>
                     <el-form-item label="图片目录">
-                        <el-input  v-model="formData.directory"></el-input>
+                        <el-input  v-model="formData.directory" clearable></el-input>
                     </el-form-item>
                     <el-form-item label="开始时间">
                         <el-date-picker
@@ -19,6 +19,7 @@
                         <el-date-picker
                                 v-model="formData.end_time"
                                 type="date"
+                                :picker-options="{disabledDate: (time) => {return time.getTime() < new Date(formData.start_time) - 8.64e7}}"
                                 placeholder="选择结束时间"
                                 format="yyyy 年 MM 月 dd 日"
                                 value-format="yyyy-MM-dd">
@@ -30,7 +31,12 @@
                 <el-table :data="list" stripe>
                     <el-table-column prop="id" label="ID" width="60"></el-table-column>
                     <el-table-column prop="directory" label="目录" width="100"></el-table-column>
-                    <el-table-column prop="url" label="Url"></el-table-column>
+                    <el-table-column prop="url" label="Url">
+                        <template slot-scope="scope">
+                            {{scope.row.url}}
+                            <el-button size="mini" circle class="clipboard_btn" :data-clipboard-text="scope.row.url" @click="copy" icon="el-icon-document-copy"></el-button>
+                        </template>
+                    </el-table-column>
                     <el-table-column prop="created_at" label="上传时间"></el-table-column>
                     <el-table-column label="预览">
                         <template slot-scope="scope">
@@ -59,6 +65,8 @@
 </template>
 
 <script>
+    import Clipboard from 'clipboard';
+
     export default {
         name: "qiniu-preview",
         data() {
@@ -106,10 +114,19 @@
                         }
                     })
                 });
+            },
+            copy() {
+                let clipboard = new Clipboard('.clipboard_btn')
+                clipboard.on('success', () => {
+                    this.$message.success('复制成功');
+                    // 释放内存
+                    clipboard.destroy()
+                });
             }
         },
         created() {
             this.getList();
+            new Clipboard('clipboard_btn');
         }
     }
 </script>

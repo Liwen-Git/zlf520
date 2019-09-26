@@ -2,6 +2,9 @@
     <el-row>
         <el-col :span="24">
             <el-card>
+                <div slot="header">
+                    <span>图片上传</span>
+                </div>
                 <el-row>
                     <el-col :span="5" style="margin-bottom: 15px;">
                         <el-switch

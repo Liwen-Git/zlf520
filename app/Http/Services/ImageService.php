@@ -4,7 +4,6 @@
 namespace App\Http\Services;
 
 use App\Http\Modules\Image;
-use function foo\func;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
