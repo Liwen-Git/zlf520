@@ -6,6 +6,7 @@ import welcome from '../components/welcome.vue'
 
 // 七牛对象存储
 import QiniuUpload from '../components/qiniu/upload'
+import QiniuPreview from '../components/qiniu/preview'
 
 /**
  *
@@ -20,6 +21,7 @@ const routes = [
         component: Home,
         children: [
             {path: 'qiniu/upload', component: QiniuUpload, name: 'qiniu-upload'},
+            {path: 'qiniu/preview', component: QiniuPreview, name: 'qiniu-preview'},
         ]
     },
 

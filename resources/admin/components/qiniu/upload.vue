@@ -27,7 +27,7 @@
         name: "qiniu-upload",
         data() {
             return {
-                dirs: ['blog', 'video', 'life', 'work', 'audio', 'other'],
+                dirs: ['blog', 'life', 'work', 'other'],
                 directory1: 'blog',
                 directory2: '',
                 switchVal: true,

@@ -1,7 +1,7 @@
 <template>
-    <el-row class="public-height-hundred">
-        <el-col :span="18" :offset="3" class="public-height-hundred">
-            <el-container class="public-height-hundred">
+    <el-row style="min-height: 100%">
+        <el-col :span="18" :offset="3" style="padding-bottom: 20px;">
+            <el-container>
                 <el-header>
                     <el-menu
                             :default-active="activeMenu"
@@ -14,7 +14,7 @@
                         <el-submenu index="2">
                             <template slot="title">七牛对象存储</template>
                             <el-menu-item index="/qiniu/upload">上传</el-menu-item>
-                            <el-menu-item index="2-2">预览</el-menu-item>
+                            <el-menu-item index="/qiniu/preview">预览</el-menu-item>
                         </el-submenu>
                         <el-submenu :index="user.name" style="float:right;">
                             <template slot="title">{{user.name}}</template>
@@ -25,13 +25,13 @@
                 <el-main>
                     <router-view></router-view>
                 </el-main>
-                <el-footer class="home-footer">
-                    <span>© 2018-2019 Powered By</span>
-                    <a href="https://github.com/Liwen-Git" target="_blank">liwen</a> |
-                    <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备19082463号</a>
-                </el-footer>
             </el-container>
         </el-col>
+        <el-footer class="home-footer">
+            <span>© 2018-2019 Powered By</span>
+            <a href="https://github.com/Liwen-Git" target="_blank">liwen</a> |
+            <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备19082463号</a>
+        </el-footer>
     </el-row>
 </template>
 
@@ -79,9 +79,6 @@
 </script>
 
 <style scoped>
-    .public-height-hundred {
-        height: 100%;
-    }
     .home-footer {
         height: 20px !important;
         bottom: 0;
@@ -89,5 +86,6 @@
         text-align: center;
         margin: 5px 0;
         font-size: 14px;
+        position: absolute;
     }
 </style>
