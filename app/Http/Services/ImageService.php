@@ -7,21 +7,24 @@ use App\Http\Modules\Image;
 use function foo\func;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 
 class ImageService extends BaseService
 {
     /**
      * 图片添加
-     * @param $directory
-     * @param $url
+     * @param array $data
      * @return Image
      */
-    public static function add($directory, $url)
+    public static function add(array $data)
     {
         $image = new Image();
-        $image->directory = $directory;
-        $image->url = $url;
+        $image->directory = $data['directory'];
+        $image->url = $data['url'];
+        $image->qiniu_url = $data['qiniu_url'];
+        $image->type = $data['type'];
         $image->save();
 
         return $image;
@@ -35,11 +38,13 @@ class ImageService extends BaseService
     public static function list(array $param)
     {
         $directory = Arr::get($param, 'directory', '');
+        $type = Arr::get($param, 'type', 1);
         $startTime = Arr::get($param, 'startTime', '');
         $endTime = Arr::get($param, 'endTime', '');
         $pageSize = Arr::get($param, 'pageSize', 15);
 
-        $data = Image::when($directory, function (Builder $query) use ($directory) {
+        $data = Image::where('type', $type)
+        ->when($directory, function (Builder $query) use ($directory) {
             $query->where('directory', $directory);
         })->when($startTime, function (Builder $query) use ($startTime) {
             $query->where('created_at', '>=', $startTime);
@@ -49,5 +54,15 @@ class ImageService extends BaseService
             ->paginate($pageSize);
 
         return $data;
+    }
+
+    /**
+     * @param $id
+     * @return Image|Image[]|Collection|Model|null
+     */
+    public static function getById($id)
+    {
+        $detail = Image::find($id);
+        return $detail;
     }
 }

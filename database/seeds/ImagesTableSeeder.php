@@ -24,7 +24,13 @@ class ImagesTableSeeder extends Seeder
                 $url = 'http://' . env('QINIU_DOMAINS') . '/' . $item;
                 $arr = explode('/', $item);
                 $directory = $arr[0];
-                ImageService::add($directory, $url);
+                $data = [
+                    'directory' => $directory,
+                    'url' => $url,
+                    'qiniu_url' => $item,
+                    'type' => 1,
+                ];
+                ImageService::add($data);
             }
         }
     }

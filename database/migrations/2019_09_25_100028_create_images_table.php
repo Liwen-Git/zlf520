@@ -16,7 +16,9 @@ class CreateImagesTable extends Migration
         Schema::create('images', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('directory')->comment('目录名称');
-            $table->string('url')->comment('图片url');
+            $table->string('url')->comment('资源url');
+            $table->string('qiniu_url')->comment('七牛url');
+            $table->integer('type')->comment('1-图片 2-视频 3-音频');
             $table->timestamps();
         });
     }

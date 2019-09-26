@@ -25,6 +25,8 @@ Route::middleware('admin')
         Route::post('/logout', 'LoginController@logout');
 
         // 七牛
-        Route::post('/qiniu/upload/image', 'QiNiuController@uploadImage');
+        Route::post('/qiniu/upload', 'QiNiuController@upload');
+        Route::post('/qiniu/upload/delete', 'QiNiuController@delete');
+
         Route::get('/qiniu/image/list', 'ImageController@getList');
     });

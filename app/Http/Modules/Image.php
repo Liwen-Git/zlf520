@@ -2,6 +2,7 @@
 
 namespace App\Http\Modules;
 
+use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
 
@@ -21,7 +22,11 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Image whereId($value)
  * @method static Builder|Image whereUpdatedAt($value)
  * @method static Builder|Image whereUrl($value)
- * @mixin \Eloquent
+ * @mixin Eloquent
+ * @property string $qiniu_url 七牛url
+ * @property int $type 1-图片 2-视频 3-音频
+ * @method static Builder|Image whereQiniuUrl($value)
+ * @method static Builder|Image whereType($value)
  */
 class Image extends BaseModel
 {

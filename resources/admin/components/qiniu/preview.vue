@@ -25,7 +25,7 @@
                         </el-date-picker>
                     </el-form-item>
 
-                    <el-button size="small" type="primary">查询</el-button>
+                    <el-button size="small" type="primary" @click="search">查询</el-button>
                 </el-form>
                 <el-table :data="list" stripe>
                     <el-table-column prop="id" label="ID" width="60"></el-table-column>
@@ -41,7 +41,18 @@
                             </el-image>
                         </template>
                     </el-table-column>
+                    <el-table-column label="操作" width="100">
+                        <template slot-scope="scope">
+                            <el-button type="danger" size="mini" @click="deleteImage(scope.row)">删除</el-button>
+                        </template>
+                    </el-table-column>
                 </el-table>
+                <el-pagination
+                        layout="total, prev, pager, next"
+                        :total="total"
+                        :current-page.sync="page"
+                        :page-size="pageSize"
+                        @current-change="getList"></el-pagination>
             </el-card>
         </el-col>
     </el-row>
@@ -67,6 +78,7 @@
         methods: {
             getList() {
                 this.tableLoading = true;
+                this.formData.type = 1;
                 this.formData.page = this.page;
                 this.formData.page_size = this.pageSize;
                 api.get('/qiniu/image/list', this.formData).then(data => {
@@ -74,6 +86,26 @@
                     this.total = data.total;
                     this.tableLoading = false;
                 })
+            },
+            search() {
+                this.page = 1;
+                this.getList();
+            },
+            deleteImage(row) {
+                this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    api.post('/qiniu/upload/delete', {id: row.id}).then(data => {
+                        if (data && data.status) {
+                            this.$message.success('删除成功');
+                            this.getList();
+                        } else {
+                            this.$message.error('删除失败');
+                        }
+                    })
+                });
             }
         },
         created() {

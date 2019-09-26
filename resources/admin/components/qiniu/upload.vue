@@ -16,7 +16,7 @@
                         <el-input v-if="!switchVal" size="small" v-model="directory2" style="width: 193px;"></el-input>
                     </el-col>
                 </el-row>
-                <image-upload :action="action" :multiple="true"></image-upload>
+                <image-upload :action="imageAction" :multiple="true"></image-upload>
             </el-card>
         </el-col>
     </el-row>
@@ -34,11 +34,11 @@
             }
         },
         computed: {
-            action() {
+            imageAction() {
                 let dir = this.switchVal ? this.directory1 : this.directory2;
-                let api = '/api/qiniu/upload/image';
+                let api = '/api/qiniu/upload';
 
-                return `${api}?directory=${dir}`;
+                return `${api}?directory=${dir}&type=1`;
             }
         }
     }
