@@ -28,7 +28,7 @@
 
                     <el-button size="small" type="primary" @click="search">查询</el-button>
                 </el-form>
-                <el-table :data="list" stripe>
+                <el-table :data="list" v-loading="tableLoading" stripe>
                     <el-table-column prop="id" label="ID" width="60"></el-table-column>
                     <el-table-column prop="directory" label="目录" width="100"></el-table-column>
                     <el-table-column prop="url" label="Url">
