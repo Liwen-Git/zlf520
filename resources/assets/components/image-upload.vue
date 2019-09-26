@@ -12,6 +12,7 @@
                 :disabled="disabled"
                 :limit="limit"
                 :data="data"
+                :multiple="multiple"
                 :on-exceed="onExceed"
                 :class="{'upload-fulled' : fileList.length >= limit}"
         >
@@ -39,6 +40,7 @@
      *      disabled: 是否可删除, 禁用
      *      listType: 图片列表类型: picture-card/picture/text, 默认: picture-card
      *      preview: 是否可预览图片
+     *      multiple: 是否支持多文件上传
      *  功能:
      *      图片上传功能
      *      删除按钮
@@ -60,7 +62,8 @@
             disabled: {type: Boolean, default: false},
             listType: {type: String, default: 'picture-card'},
             preview: {type: Boolean, default: false},
-            data: {type: Object, default: () => {}}
+            data: {type: Object, default: () => {}},
+            multiple: {type: Boolean, default: false},
         },
         mixins: [emitter],
         data(){

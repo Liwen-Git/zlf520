@@ -16,7 +16,7 @@
                         <el-input v-if="!switchVal" size="small" v-model="directory2" style="width: 193px;"></el-input>
                     </el-col>
                 </el-row>
-                <image-upload :action="action"></image-upload>
+                <image-upload :action="action" :multiple="true"></image-upload>
             </el-card>
         </el-col>
     </el-row>
