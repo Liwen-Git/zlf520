@@ -18,3 +18,6 @@ Route::get('/', function () {
 });
 
 Route::view('/admin', 'admin');
+
+// laravel blade 的页面
+Route::view('/love/the_red_heart', 'welcome');

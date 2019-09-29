@@ -1,28 +1,25 @@
 <template>
-	<el-row>
-		<el-col :span="8"><div class="grid-content "></div></el-col>
-		<el-col :span="8">
-			<div class="grid-content ">
-				<h1 >welcome zlf</h1>
-			</div>
-		</el-col>
-		<el-col :span="8"><div class="grid-content "></div></el-col>
-	</el-row>
+	<iframe :src="url" class="welcome-iframe"></iframe>
 </template>
 
-<script type="text/javascript">
-
+<script>
+	export default {
+		name: 'welcome',
+		data() {
+			return {
+				url: '',
+			}
+		},
+		mounted() {
+			this.url = 'http://' + window.location.host + '/love/the_red_heart';
+		}
+	}
 </script>
 
 <style scoped>
-	.grid-content {
-		text-align: center;
-		border-radius: 4px;
-		min-height: 36px;
-		margin: 150px 0;
+	.welcome-iframe {
+		border: none;
+		width: 100%;
+		height: 700px;
 	}
-	h1{
-		font-size: 34px;
-	}
-
 </style>

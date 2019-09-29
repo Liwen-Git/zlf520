@@ -5,6 +5,11 @@ import _ from 'lodash';
 window._ = _;
 
 /**
+ * 引入jquery
+ */
+window.$ = window.jQuery = require('jquery');
+
+/**
  * 引入 JavaScript 日期处理类库
  */
 import moment from 'moment';

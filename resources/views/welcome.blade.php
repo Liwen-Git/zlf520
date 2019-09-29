@@ -1,102 +1,92 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>李子园</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Our Love Story</title>
+    <style type="text/css">
+        @font-face {
+            font-family: dight;
+            src: {{ url('love_file/heart/fonts/digital-7_mono.ttf') }}
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="{{ asset('love_file/heart/css/style.css') }}">
+    <script src="http://cdn.bootcss.com/jquery/2.0.0/jquery.js"></script>
+    <script type="text/javascript" src="{{ asset('love_file/heart/js/garden.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('love_file/heart/js/function.js') }}"></script>
+</head>
+<body>
+<div id="mainDiv">
+    <div id="content">
+        {{--<div id="code">
+            <span class="comments">/**</span><br/>
+            <span class="space"/><span class="comments">* We are both programmers,</span><br />
+            <span class="space"/><span class="comments">* so I write some code to describe our stories.</span><br />
+            <span class="space"/><span class="comments">*/</span><br />
+            Boy i = <span class="keyword">new</span> Boy(<span class="string">"Muyy"</span>);<br />
+            Girl u = <span class="keyword">new</span> Gril(<span class="string">"Poem"</span>);<br />
+            <span class="comments">// Nov 2, 2017, I told you I love you. </span><br />
+            i.love(u);<br />
+            <span class="comments">// Luckily, you accepted and became my girlfriend eversince.</span><br />
+            u.accepted();<br />
+            <span class="comments">// Since then, I miss u every day.</span><br />
+            i.miss(u);<br />
+            <span class="comments">// And take care of u and our love.</span><br />
+            i.takeCareOf(u);<br />
+            <span class="comments">// You say that you won't be so easy to marry me.</span><br />
+            <span class="comments">// So I keep waiting and I have confidence that you will.</span><br />
+            <span class="keyword">boolean</span> isHesitate = <span class="keyword">true</span>;<br />
+            <span class="keyword">while</span> (isHesitate) {<br />
+            <span class="placeholder"/>i.waitFor(u);<br />
+            <span class="placeholder"/><span class="comments">// I think it is an important decision</span><br />
+            <span class="placeholder"/><span class="comments">// and you should think it over.</span><br />
+            <span class="placeholder"/>isHesitate = u.thinkOver();<br />
+            }<br />
+            <span class="comments">// After a romantic wedding, we will live happily ever after.</span><br />
+            i.marry(u);<br />
+            i.liveHappilyWith(u);<br />
+        </div>--}}
+        <div id="loveHeart">
+            <canvas id="garden"></canvas>
+            <div id="words">
+                <div id="messages">
+                    Fei, I have fallen in love with you for
+                    <div id="elapseClock"></div>
                 </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
+                <div id="loveu">
+                    Love u forever and ever.<br/>
+                    <div class="signature">- W</div>
                 </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
-            <div style="position: absolute; bottom: 0px;">
-                <a href="http://www.beian.miit.gov.cn/" style="text-decoration: none">粤ICP备19082463号</a>
             </div>
         </div>
-    </body>
+    </div>
+</div>
+<script type="text/javascript">
+    let offsetX = $("#loveHeart").width() / 2;
+    let offsetY = $("#loveHeart").height() / 2 - 55;
+    let together = new Date();
+    together.setFullYear(2017, 9, 27); //2017/9/27
+    together.setHours(23);
+    together.setMinutes(0);
+    together.setSeconds(0);
+    together.setMilliseconds(0);
+    if (!document.createElement('canvas').getContext) {
+        let msg = document.createElement("div");
+        msg.id = "errorMsg";
+        msg.innerHTML = "Your browser doesn't support HTML5!";
+        document.body.appendChild(msg);
+        $("#code").css("display", "none");
+    } else {
+        setTimeout(function() {
+            startHeartAnimation();
+        }, 1000);
+
+        timeElapse(together);
+
+        adjustCodePosition();
+        $("#code").typewriter(); // 打字效果
+    }
+</script>
+</body>
 </html>
