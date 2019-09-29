@@ -1,7 +1,7 @@
 <template>
     <el-row>
         <el-col :span="24">
-            <el-card>
+            <el-card shadow="hover">
                 <div slot="header">
                     <span>图片上传</span>
                 </div>
@@ -30,7 +30,7 @@
         name: "qiniu-upload",
         data() {
             return {
-                dirs: ['blog', 'life', 'work', 'other'],
+                dirs: ['blog', 'life', 'work', 'zlf', 'other'],
                 directory1: 'blog',
                 directory2: '',
                 switchVal: true,
@@ -42,8 +42,8 @@
                 let api = '/api/qiniu/upload';
 
                 return `${api}?directory=${dir}&type=1`;
-            }
-        }
+            },
+        },
     }
 </script>
 

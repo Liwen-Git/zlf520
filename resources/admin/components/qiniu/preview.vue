@@ -1,7 +1,7 @@
 <template>
     <el-row>
         <el-col :span="24">
-            <el-card>
+            <el-card shadow="hover">
                 <el-form ref="form" :model="formData" size="small" inline>
                     <el-form-item label="图片目录">
                         <el-input  v-model="formData.directory" clearable></el-input>
@@ -79,7 +79,7 @@
                     end_time: '',
                 },
                 page: 1,
-                pageSize: 15,
+                pageSize: 10,
                 total: 0,
             }
         },
