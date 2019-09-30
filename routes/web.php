@@ -17,7 +17,11 @@ Route::get('/', function () {
     return redirect('/admin');
 });
 
+// 后台页面
 Route::view('/admin', 'admin');
 
 // laravel blade 的页面
 Route::view('/love/the_red_heart', 'welcome');
+
+// wechat路由
+Route::any('/wechat', 'WeChatController@serve');
