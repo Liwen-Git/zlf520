@@ -6,6 +6,11 @@ namespace App\Http\Services;
 
 class WeChatService extends BaseService
 {
+
+    /**
+     * 个人无法自定义菜单
+     * @return array
+     */
     public static function getMenu()
     {
         $button = [
