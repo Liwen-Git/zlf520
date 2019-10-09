@@ -12,7 +12,7 @@
         }
     </style>
     <link rel="stylesheet" type="text/css" href="{{ asset('love_file/heart/css/style.css') }}">
-    <script src="http://cdn.bootcss.com/jquery/2.0.0/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.js"></script>
     <script type="text/javascript" src="{{ asset('love_file/heart/js/garden.js') }}"></script>
     <script type="text/javascript" src="{{ asset('love_file/heart/js/function.js') }}"></script>
 </head>

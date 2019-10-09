@@ -11,7 +11,7 @@
 			}
 		},
 		mounted() {
-			this.url = 'https://' + window.location.host + '/love/the_red_heart';
+			this.url = document.location.protocol + '//' + window.location.host + '/love/the_red_heart';
 		}
 	}
 </script>
