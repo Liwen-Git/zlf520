@@ -4,11 +4,19 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Services\WeChatService;
+
 class WeChatController extends Controller
 {
     public function serve()
     {
         $app = app('wechat.official_account');
+
+        // 创建菜单
+        $button = WeChatService::getMenu();
+        $app->menu->create($button);
+
+        // 自动回复消息
         $app->server->push(function ($message) {
             switch ($message['MsgType']) {
                 case 'text':
