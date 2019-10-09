@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>zlf专用</title>
+    <title>Dream & Love</title>
     <link rel="stylesheet" href="{{mix('css/all.css')}}">
     <style>
         @-webkit-keyframes scale {
