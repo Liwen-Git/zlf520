@@ -9,7 +9,7 @@ svg.like {
   position: fixed;
   z-index: 10;
   top: calc(50vh - 160px);
-  left: calc(50vw - 160px);
+  left: calc(35vw - 160px);
   border-radius: 100%;
   -webkit-transform: scale(0.3);
   transform: scale(0.3);
@@ -23,7 +23,7 @@ svg.like {
 svg.fly {
   position: fixed;
   top: calc(50vh - 55px);
-  left: calc(50vw - 55px);
+  left: calc(35vw - 55px);
   fill: #18FFFF;
 }
 
@@ -31,7 +31,7 @@ svg.h {
   position: fixed;
   z-index: 8;
   top: calc(50vh - 20px);
-  left: calc(50vw - 20px);
+  left: calc(35vw - 20px);
   fill: #fbff00;
 }
 svg.h.h-5, svg.h.h-6, svg.h.h-7, svg.h.h-8 {
@@ -46,7 +46,7 @@ div.dot {
   z-index: 9;
   border-radius: 100%;
   top: calc(50vh - 6px);
-  left: calc(50vw - 6px);
+  left: calc(35vw - 6px);
 }
 div.dot:before {
   content: "";
