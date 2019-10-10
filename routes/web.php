@@ -25,6 +25,3 @@ Route::view('/love/the_red_heart', 'welcome');
 
 // wechat路由
 Route::any('/wechat', 'WeChatController@serve');
-
-// git webhook 自动拉取代码
-Route::post('/webhook', 'GitController@webHook');
