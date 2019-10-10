@@ -12,7 +12,8 @@ class GitController extends Controller
     {
         // 获取push数据内容的方法
         $request = file_get_contents("php://input");
-        Log::info('git webhook:', json_decode($request, true));
+        $logArr = json_decode($request, true) ?: [];
+        Log::info('git webhook:', $logArr);
 
         // 只需这一行代码便可拉取
         echo shell_exec('cd /root/www/zlf520 && git pull');
