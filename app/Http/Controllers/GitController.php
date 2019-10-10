@@ -19,6 +19,6 @@ class GitController extends Controller
         Log::info('git webhook:', $logArr);
 
         // 只需这一行代码便可拉取
-        echo shell_exec('cd /root/www/zlf520 && git pull');
+        shell_exec('cd /root/www/zlf520 && git pull');
     }
 }
