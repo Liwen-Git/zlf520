@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Log;
 
 class GitController extends Controller
 {
+    /**
+     * github webhook 自动拉取代码
+     */
     public function webHook()
     {
         // 获取push数据内容的方法
