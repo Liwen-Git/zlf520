@@ -3,6 +3,8 @@
 // 获取push数据内容的方法
 $requestBody = file_get_contents("php://input");
 if (empty($requestBody)) {
+    $req_log = '-------------------------'.PHP_EOL.'send fail';
+    file_put_contents("git-webhook.txt", $req_log, FILE_APPEND);
     die('send fail');
 }
 $content = json_decode($requestBody, true);
