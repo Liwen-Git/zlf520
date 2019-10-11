@@ -33,7 +33,7 @@
                     <el-table-column prop="directory" label="目录" width="100"></el-table-column>
                     <el-table-column prop="url" label="Url">
                         <template slot-scope="scope">
-                            {{scope.row.url}}
+                            {{httpHeader + (scope.row.url).slice(5)}}
                             <el-button size="mini" circle class="clipboard_btn" :data-clipboard-text="scope.row.url" @click="copy" icon="el-icon-document-copy"></el-button>
                         </template>
                     </el-table-column>
@@ -42,8 +42,8 @@
                         <template slot-scope="scope">
                             <el-image
                                     style="width: 100px; height: 100px"
-                                    :src="scope.row.url"
-                                    :preview-src-list="[scope.row.url]">
+                                    :src="httpHeader + (scope.row.url).slice(5)"
+                                    :preview-src-list="[httpHeader + (scope.row.url).slice(5)]">
                             </el-image>
                         </template>
                     </el-table-column>
@@ -81,6 +81,8 @@
                 page: 1,
                 pageSize: 10,
                 total: 0,
+
+                httpHeader: document.location.protocol,
             }
         },
         methods: {
