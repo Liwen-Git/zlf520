@@ -28,5 +28,10 @@ Route::middleware('admin')
         Route::post('/qiniu/upload', 'QiNiuController@upload');
         Route::post('/qiniu/upload/delete', 'QiNiuController@delete');
 
+        // 本地上传
+        Route::post('/local/upload', 'UploadController@upload');
+        Route::post('/local/upload/delete', 'UploadController@delete');
+
+        // 图片列表
         Route::get('/qiniu/image/list', 'ImageController@getList');
     });

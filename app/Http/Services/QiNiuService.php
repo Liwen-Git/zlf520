@@ -20,4 +20,17 @@ class QiNiuService extends BaseService
 
         return $list;
     }
+
+    /**
+     * 获取文件内容
+     * @param $path
+     * @return mixed
+     */
+    public static function getFile($path)
+    {
+        $disk = QiniuStorage::disk('qiniu');
+        $file = $disk->get($path);
+
+        return $file;
+    }
 }

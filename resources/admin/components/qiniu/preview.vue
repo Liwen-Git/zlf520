@@ -107,7 +107,7 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    api.post('/qiniu/upload/delete', {id: row.id}).then(data => {
+                    api.post('/local/upload/delete', {id: row.id}).then(data => {
                         if (data && data.status) {
                             this.$message.success('删除成功');
                             this.getList();

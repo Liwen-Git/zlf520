@@ -39,7 +39,7 @@
         computed: {
             imageAction() {
                 let dir = this.switchVal ? this.directory1 : this.directory2;
-                let api = '/api/qiniu/upload';
+                let api = '/api/local/upload';
 
                 return `${api}?directory=${dir}&type=1`;
             },

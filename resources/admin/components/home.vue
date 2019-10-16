@@ -12,7 +12,7 @@
                             active-text-color="#ffd04b">
                         <el-menu-item index="/welcome"><i class="el-icon-s-home"></i>主页</el-menu-item>
                         <el-submenu index="2">
-                            <template slot="title">七牛对象存储</template>
+                            <template slot="title">对象存储</template>
                             <el-menu-item index="/qiniu/upload">上传</el-menu-item>
                             <el-menu-item index="/qiniu/preview">预览</el-menu-item>
                         </el-submenu>

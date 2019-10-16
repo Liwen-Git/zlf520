@@ -21,13 +21,16 @@ class ImagesTableSeeder extends Seeder
         $list = QiNiuService::getAllFiles('blog');
         if (!empty($list)) {
             foreach ($list as $item) {
-                $url = 'http://' . env('QINIU_DOMAINS') . '/' . $item;
                 $arr = explode('/', $item);
                 $directory = $arr[0];
+
+                $path_storage = 'storage/' . $item;
+                $url = asset($path_storage);
+
                 $data = [
                     'directory' => $directory,
                     'url' => $url,
-                    'qiniu_url' => $item,
+                    'qiniu_url' => 'public/'.$item,
                     'type' => 1,
                 ];
                 ImageService::add($data);

@@ -8,24 +8,26 @@ use App\Http\Services\ImageService;
 use App\Result;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 use zgldh\QiniuStorage\QiniuStorage;
 
-class QiNiuController extends Controller
+class UploadController extends Controller
 {
     /**
-     * 七牛上传
+     * 上传
      * @return ResponseFactory|Response
      */
     public function upload()
     {
         $file = request()->file('file');
 
-        $disk = QiniuStorage::disk('qiniu');
         $directory = request('directory', 'blog');
-        // 上传到七牛云
-        $path = $disk->put($directory, $file);
-        $url = 'http://' . env('QINIU_DOMAINS') . '/' . $path;
+        // 上传
+        $path = $file->store('public/'. $directory);
+        $path_storage = 'storage' . substr($path, 6);
+        $url = asset($path_storage);
+
         // 添加数据库
         $data = [
             'directory' => $directory,
@@ -52,8 +54,7 @@ class QiNiuController extends Controller
         $id = request('id');
         $detail = ImageService::getById($id);
 
-        $disk = QiniuStorage::disk('qiniu');
-        $res = $disk->delete($detail->qiniu_url);
+        $res = Storage::delete($detail->qiniu_url);
 
         if ($res) {
             ImageService::deleteById($id);

@@ -64,4 +64,14 @@ class ImageService extends BaseService
         $detail = Image::find($id);
         return $detail;
     }
+
+    /**
+     * @param $id
+     * @return int
+     */
+    public static function deleteById($id)
+    {
+        $res = Image::destroy($id);
+        return $res;
+    }
 }
