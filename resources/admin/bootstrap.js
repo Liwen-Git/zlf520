@@ -41,6 +41,12 @@ axios.defaults.headers.sessionId = Lockr.get('sessionId');
 axios.defaults.headers['Content-Type'] = 'application/json';
 
 /**
+ * md5
+ */
+import md5 from 'md5';
+window.md5 = md5;
+
+/**
  * Next we will register the CSRF Token as a common header with Axios so that
  * all outgoing HTTP requests automatically have it attached. This is just
  * a simple convenience so we don't have to attach every token manually.

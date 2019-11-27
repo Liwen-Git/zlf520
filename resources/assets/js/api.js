@@ -95,9 +95,66 @@ function mockData(data) {
     })
 }
 
+function getMiniRealUrl(url) {
+    if(url.indexOf('/') === 0){
+        url = url.substr(1);
+    }
+    return window.miniApiUrl + url;
+}
+
+function addParams(params) {
+    let signStr = 'this is my secret token';
+    params.timestamp = new Date().getTime();
+    Object.keys(params).forEach(function (key) {
+        signStr += key + params[key];
+    });
+    params.sign = md5(signStr);
+
+    return params;
+}
+
+function miniGet(url, params={}, defaultHandlerRes=true) {
+    params = addParams(params);
+    let options = {
+        headers: {'X-Requested-With': 'XMLHttpRequest'},
+        params: params,
+    };
+    url = getMiniRealUrl(url);
+    let promise = axios.get(url, options).then(res => {
+        let result = res.data;
+        if(defaultHandlerRes){
+            return handlerRes(result);
+        }else {
+            return result;
+        }
+    });
+    promise.catch(handlerError);
+    return promise;
+}
+
+function miniPost(url, params={}, defaultHandlerRes=true) {
+    params = addParams(params);
+    let options = {
+        headers: {'X-Requested-With': 'XMLHttpRequest'},
+    };
+    url = getMiniRealUrl(url);
+    let promise = axios.post(url, params, options).then(res => {
+        let result = res.data;
+        if(defaultHandlerRes){
+            return handlerRes(result);
+        }else {
+            return result;
+        }
+    });
+    promise.catch(handlerError);
+    return promise;
+}
+
 export default {
     get,
     post,
     mockData,
     handlerRes,
+    miniPost,
+    miniGet,
 }

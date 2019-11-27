@@ -8,6 +8,9 @@ import welcome from '../components/welcome.vue'
 import QiniuUpload from '../components/qiniu/upload'
 import QiniuPreview from '../components/qiniu/preview'
 
+// 小程序后台配置
+import BookkeepingType from '../components/miniprogram/bookkeeping/type'
+
 /**
  *
  */
@@ -22,6 +25,15 @@ const routes = [
         children: [
             {path: 'qiniu/upload', component: QiniuUpload, name: 'qiniu-upload'},
             {path: 'qiniu/preview', component: QiniuPreview, name: 'qiniu-preview'},
+        ]
+    },
+
+    // 小程序后台
+    {
+        path: '/',
+        component: Home,
+        children: [
+            {path: 'mini/bookkeeping/type', component: BookkeepingType, name: 'bookkeeping-type'},
         ]
     },
 

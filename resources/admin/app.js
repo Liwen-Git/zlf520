@@ -50,7 +50,13 @@ Vue.component('page', page);
 import ImageUpload from '../assets/components/image-upload'
 Vue.component('ImageUpload', ImageUpload);
 
+// 请求api
 window.baseApiUrl = '/api/';
+if (process.env.NODE_ENV === 'production') {
+    window.miniApiUrl = '';
+} else {
+    window.miniApiUrl = 'http://127.0.0.1:8000/';
+}
 import api from '../assets/js/api'
 window.api = api;
 

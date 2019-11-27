@@ -10,7 +10,6 @@ use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
-use zgldh\QiniuStorage\QiniuStorage;
 
 class UploadController extends Controller
 {

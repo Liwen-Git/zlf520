@@ -16,6 +16,13 @@
                             <el-menu-item index="/qiniu/upload">上传</el-menu-item>
                             <el-menu-item index="/qiniu/preview">预览</el-menu-item>
                         </el-submenu>
+                        <el-submenu index="3">
+                            <template slot="title">小程序</template>
+                            <el-submenu index="3-1">
+                                <template slot="title">记账本</template>
+                                <el-menu-item index="/mini/bookkeeping/type">类型</el-menu-item>
+                            </el-submenu>
+                        </el-submenu>
                         <el-submenu :index="user.name" style="float:right;">
                             <template slot="title">{{user.name}}</template>
                             <el-menu-item @click="logout">退出</el-menu-item>
