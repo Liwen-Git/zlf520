@@ -102,19 +102,7 @@ function getMiniRealUrl(url) {
     return window.miniApiUrl + url;
 }
 
-function addParams(params) {
-    let signStr = 'this is my secret token';
-    params.timestamp = new Date().getTime();
-    Object.keys(params).forEach(function (key) {
-        signStr += key + params[key];
-    });
-    params.sign = md5(signStr);
-
-    return params;
-}
-
 function miniGet(url, params={}, defaultHandlerRes=true) {
-    params = addParams(params);
     let options = {
         headers: {'X-Requested-With': 'XMLHttpRequest'},
         params: params,
@@ -133,7 +121,6 @@ function miniGet(url, params={}, defaultHandlerRes=true) {
 }
 
 function miniPost(url, params={}, defaultHandlerRes=true) {
-    params = addParams(params);
     let options = {
         headers: {'X-Requested-With': 'XMLHttpRequest'},
     };

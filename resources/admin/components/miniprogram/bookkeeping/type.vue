@@ -64,7 +64,9 @@
                         this.$message.error('该分类存在子类');
                         return false;
                     }
-
+                    api.miniPost('bookkeeping/bill_type/delete', {id: data.id}).then(() => {
+                        this.$message.success('删除成功');
+                    })
                 })
             }
         },
