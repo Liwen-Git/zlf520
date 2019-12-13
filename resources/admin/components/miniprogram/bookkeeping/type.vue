@@ -4,12 +4,27 @@
             <span class="custom-tree-node" slot-scope="{ node, data }">
                 <span>{{ data.name }}</span>
                 <span>
-                    <el-button v-if="!data.pid" type="text" size="mini">新增</el-button>
-                    <el-button v-if="data.id !== '0'" type="text" size="mini">编辑</el-button>
-                    <el-button v-if="data.id !== '0'" type="text" size="mini" @click="deleteType(data)">删除</el-button>
+                    <el-button v-if="!data.pid" type="text" size="mini" @click="add(data)">新增</el-button>
+                    <el-button v-if="data.id !== 0" type="text" size="mini" @click="edit(data, node)">编辑</el-button>
+                    <el-button v-if="data.id !== 0" type="text" size="mini" @click="deleteType(data)">删除</el-button>
                 </span>
             </span>
         </el-tree>
+
+        <el-dialog :title="title" :visible.sync="showDialog" width="30%">
+            <el-form ref="form" :model="formData" :rules="formRules" label-width="80px">
+                <el-form-item label="父级类型">
+                    {{parentRow.name}}
+                </el-form-item>
+                <el-form-item label="类型名称" prop="name">
+                    <el-input v-model="formData.name" size="medium"></el-input>
+                </el-form-item>
+            </el-form>
+            <span slot="footer" class="dialog-footer">
+                <el-button size="medium" @click="cancel">取 消</el-button>
+                <el-button type="primary" size="medium" @click="commit">确 定</el-button>
+            </span>
+        </el-dialog>
     </el-card>
 </template>
 
@@ -20,12 +35,25 @@
             return {
                 tree: [
                     {
-                        id: '0',
+                        id: 0,
                         pid: null,
                         name: '全部',
                         children: null,
                     }
                 ],
+                showDialog: false,
+                formData: {
+                    id: '',
+                    name: '',
+                    pid: '',
+                },
+                formRules: {
+                    name: [
+                        {required: true, message: '类型名称不能为空', trigger: 'blur'},
+                    ]
+                },
+                title: '',
+                parentRow: {},
             }
         },
         methods: {
@@ -66,8 +94,48 @@
                     }
                     api.miniPost('bookkeeping/bill_type/delete', {id: data.id}).then(() => {
                         this.$message.success('删除成功');
+                        this.getList();
                     })
                 })
+            },
+            add(data) {
+                this.formData.id = '';
+                this.formData.pid = data.id;
+                this.parentRow = data;
+                this.title = '新增';
+                this.showDialog = true;
+            },
+            cancel() {
+                this.$refs.form.resetFields();
+                this.formData.name = '';
+                this.showDialog = false;
+            },
+            commit() {
+                this.$refs.form.validate(valid => {
+                    if (valid) {
+                        if (this.formData.id) {
+                            api.miniPost('bookkeeping/bill_type/edit', this.formData).then(() => {
+                                this.$message.success('编辑成功');
+                                this.cancel();
+                                this.getList();
+                            })
+                        } else {
+                            api.miniPost('bookkeeping/bill_type/add', this.formData).then(() => {
+                                this.$message.success('新增成功');
+                                this.cancel();
+                                this.getList();
+                            })
+                        }
+                    }
+                })
+            },
+            edit(data, node) {
+                this.formData.id = data.id;
+                this.formData.pid = data.pid;
+                this.formData.name = data.name;
+                this.parentRow = node.parent.data;
+                this.title = '编辑';
+                this.showDialog = true;
             }
         },
         created() {
