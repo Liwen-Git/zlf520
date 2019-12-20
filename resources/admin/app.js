@@ -53,7 +53,7 @@ Vue.component('ImageUpload', ImageUpload);
 // 请求api
 window.baseApiUrl = '/api/';
 if (process.env.NODE_ENV === 'production') {
-    window.miniApiUrl = '';
+    window.miniApiUrl = 'http://127.0.0.1:8000/';
 } else {
     window.miniApiUrl = 'http://127.0.0.1:8000/';
 }
