@@ -35,3 +35,8 @@ Route::middleware('admin')
         // 图片列表
         Route::get('/qiniu/image/list', 'ImageController@getList');
     });
+
+Route::prefix('mini')
+    ->group(function () {
+        Route::get('/story/check', 'StoryController@checkPassword');
+    });
