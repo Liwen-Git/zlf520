@@ -36,4 +36,14 @@ class StoryService extends BaseService
         $story->save();
         return $story;
     }
+
+    public static function edit(array $data)
+    {
+        $story = Story::find($data['id']);
+        $story->content = $data['content'];
+        $story->date = $data['date'];
+        $story->save();
+
+        return $story;
+    }
 }

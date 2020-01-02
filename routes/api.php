@@ -41,4 +41,5 @@ Route::prefix('mini')
         Route::post('/story/check', 'StoryController@checkPassword');
         Route::get('/story/list', 'StoryController@list');
         Route::post('/story/add', 'StoryController@add');
+        Route::post('/story/edit', 'StoryController@edit');
     });

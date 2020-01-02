@@ -51,4 +51,21 @@ class StoryController extends Controller
 
         return Result::success($story);
     }
+
+    public function edit()
+    {
+        $this->validate(request(), [
+            'id' => 'required',
+            'date' => 'required',
+        ]);
+        $data = [
+            'id' => request('id'),
+            'content' => request('content', ''),
+            'date' => request('date'),
+        ];
+
+        $story = StoryService::edit($data);
+
+        return Result::success($story);
+    }
 }
