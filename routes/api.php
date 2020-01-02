@@ -39,4 +39,6 @@ Route::middleware('admin')
 Route::prefix('mini')
     ->group(function () {
         Route::post('/story/check', 'StoryController@checkPassword');
+        Route::get('/story/list', 'StoryController@list');
+        Route::post('/story/add', 'StoryController@add');
     });
