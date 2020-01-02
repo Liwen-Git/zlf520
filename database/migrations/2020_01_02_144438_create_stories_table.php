@@ -17,6 +17,7 @@ class CreateStoriesTable extends Migration
             $table->bigIncrements('id');
             $table->integer('wx_user_id')->comment('微信用户id');
             $table->text('content')->comment('日记内容');
+            $table->timestamp('date')->comment('日期');
             $table->timestamps();
         });
     }

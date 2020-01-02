@@ -13,12 +13,16 @@ class StoryService extends BaseService
     public static function getList(array $param)
     {
         $wx_user_id = Arr::get($param, 'wx_user_id', '');
+        $date = Arr::get($param, 'date', '');
         $pageSize = Arr::get($param, 'pageSize', 10);
+
         $query = new Story();
         $query->when($wx_user_id, function (Builder $query) use ($wx_user_id) {
             $query->where('wx_user_id', $wx_user_id);
+        })->when($date, function (Builder $query) use ($date) {
+            $query->where('date', $date);
         });
-        $data = $query->paginate($pageSize);
+        $data = $query->orderBy('date', 'desc')->paginate($pageSize);
 
         return $data;
     }
@@ -28,6 +32,7 @@ class StoryService extends BaseService
         $story = new Story();
         $story->wx_user_id = $data['wx_user_id'];
         $story->content = $data['content'];
+        $story->date = $data['date'];
         $story->save();
         return $story;
     }

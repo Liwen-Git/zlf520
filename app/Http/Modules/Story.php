@@ -25,6 +25,8 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Story whereUpdatedAt($value)
  * @method static Builder|Story whereWxUserId($value)
  * @mixin Eloquent
+ * @property string $date 日期
+ * @method static Builder|Story whereDate($value)
  */
 class Story extends BaseModel
 {

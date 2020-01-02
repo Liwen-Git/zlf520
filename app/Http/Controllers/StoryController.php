@@ -24,10 +24,12 @@ class StoryController extends Controller
     {
         $param = [
             'wx_user_id' => request('wx_user_id', ''),
+            'date' => request('data', ''),
             'pageSize' => request('pageSize', 10),
         ];
 
         $data = StoryService::getList($param);
+
         return Result::success([
             'list' => $data->items(),
             'total' => $data->total(),
@@ -37,10 +39,12 @@ class StoryController extends Controller
     public function add() {
         $this->validate(request(), [
             'wx_user_id' => 'required',
+            'date' => 'required',
         ]);
         $data = [
             'wx_user_id' => request('wx_user_id'),
-            'content' => request('content', '')
+            'content' => request('content', ''),
+            'date' => request('date'),
         ];
 
         $story = StoryService::add($data);
