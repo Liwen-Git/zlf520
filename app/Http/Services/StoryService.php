@@ -16,8 +16,7 @@ class StoryService extends BaseService
         $date = Arr::get($param, 'date', '');
         $pageSize = Arr::get($param, 'pageSize', 10);
 
-        $query = new Story();
-        $query->when($wx_user_id, function (Builder $query) use ($wx_user_id) {
+        $query = Story::when($wx_user_id, function (Builder $query) use ($wx_user_id) {
             $query->where('wx_user_id', $wx_user_id);
         })->when($date, function (Builder $query) use ($date) {
             $query->where('date', $date);
