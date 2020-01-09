@@ -34,6 +34,11 @@ Route::middleware('admin')
 
         // 图片列表
         Route::get('/qiniu/image/list', 'ImageController@getList');
+
+        // 小程序 日记
+        Route::get('/story/list', 'StoryController@list');
+        Route::post('/story/add', 'StoryController@add');
+        Route::post('/story/edit', 'StoryController@edit');
     });
 
 Route::prefix('mini')

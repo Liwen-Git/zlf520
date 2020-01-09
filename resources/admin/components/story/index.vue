@@ -129,7 +129,7 @@
         methods: {
             getList() {
                 this.tableLoading = true;
-                api.get('/mini/story/list', this.search).then(res => {
+                api.get('/story/list', this.search).then(res => {
                     this.list = res.list;
                     this.total = res.total;
                     this.tableLoading = false;
@@ -156,13 +156,13 @@
                     if(valid) {
                         if (this.editId) {
                             this.storyData.id = this.editId;
-                            api.post('/mini/story/edit', this.storyData).then(() => {
+                            api.post('/story/edit', this.storyData).then(() => {
                                 this.$message.success('日记编辑成功!');
                                 this.getList();
                                 this.closeDialog();
                             })
                         } else {
-                            api.post('/mini/story/add', this.storyData).then(() => {
+                            api.post('/story/add', this.storyData).then(() => {
                                 this.$message.success('日记添加成功!');
                                 this.getList();
                                 this.closeDialog();
