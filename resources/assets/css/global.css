@@ -470,3 +470,7 @@ a {
   color: #C0C4CC;
   font-size: 14px;
 }
+
+span {
+  white-space: pre-line;
+}

@@ -57,7 +57,7 @@
                         @current-change="getList"></el-pagination>
             </el-card>
 
-            <el-dialog :visible.sync="showDialog" :title="dialogTitle">
+            <el-dialog :visible.sync="showDialog" :title="dialogTitle" :close-on-click-modal="false">
                 <el-form ref="dialogForm" :model="storyData" :rules="storyRules" size="small" label-width="100px">
                     <el-form-item label="日记主人" prop="wx_user_id">
                         <el-select v-model="storyData.wx_user_id" clearable placeholder="选择日记主人">
@@ -83,7 +83,7 @@
                         </el-input>
                     </el-form-item>
                     <el-form-item>
-                        <el-button type="primary" @click="onSubmit">确 定</el-button>
+                        <el-button type="primary" @click="onSubmit" :loading="btnLoading">确 定</el-button>
                         <el-button @click="closeDialog">取 消</el-button>
                     </el-form-item>
                 </el-form>
@@ -98,6 +98,7 @@
         data() {
             return {
                 tableLoading: false,
+                btnLoading: false,
                 list: [],
                 search: {
                     wx_user_id: '',
@@ -154,18 +155,25 @@
             onSubmit() {
                 this.$refs.dialogForm.validate(valid => {
                     if(valid) {
+                        this.btnLoading = true;
                         if (this.editId) {
                             this.storyData.id = this.editId;
                             api.post('/story/edit', this.storyData).then(() => {
                                 this.$message.success('日记编辑成功!');
                                 this.getList();
                                 this.closeDialog();
+                                this.btnLoading = false;
+                            }).catch(() => {
+                                this.btnLoading = false;
                             })
                         } else {
                             api.post('/story/add', this.storyData).then(() => {
                                 this.$message.success('日记添加成功!');
                                 this.getList();
                                 this.closeDialog();
+                                this.btnLoading = false;
+                            }).catch(() => {
+                                this.btnLoading = false;
                             })
                         }
                     }
