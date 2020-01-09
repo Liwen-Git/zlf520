@@ -18,10 +18,11 @@
                         </el-submenu>
                         <el-submenu index="3">
                             <template slot="title">小程序</template>
-                            <el-submenu index="3-1">
+                            <!--<el-submenu index="3-1">
                                 <template slot="title">记账本</template>
                                 <el-menu-item index="/mini/bookkeeping/type">类型</el-menu-item>
-                            </el-submenu>
+                            </el-submenu>-->
+                            <el-menu-item index="/story/list">日记</el-menu-item>
                         </el-submenu>
                         <el-submenu :index="user.name" style="float:right;">
                             <template slot="title">{{user.name}}</template>

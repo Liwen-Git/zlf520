@@ -24,7 +24,7 @@ class StoryController extends Controller
     {
         $param = [
             'wx_user_id' => request('wx_user_id', ''),
-            'date' => request('data', ''),
+            'date' => request('date', ''),
             'pageSize' => request('pageSize', 10),
         ];
 

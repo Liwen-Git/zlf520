@@ -10,6 +10,7 @@ import QiniuPreview from '../components/qiniu/preview'
 
 // 小程序后台配置
 import BookkeepingType from '../components/miniprogram/bookkeeping/type'
+import StoryList from '../components/story/index'
 
 /**
  *
@@ -34,6 +35,7 @@ const routes = [
         component: Home,
         children: [
             {path: 'mini/bookkeeping/type', component: BookkeepingType, name: 'bookkeeping-type'},
+            {path: 'story/list', component: StoryList, name: 'story-list'},
         ]
     },
 
