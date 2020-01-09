@@ -25,7 +25,7 @@
                 <el-table :data="list" v-loading="tableLoading" stripe>
                     <el-table-column type="expand">
                         <template slot-scope="props">
-                            <span>{{props.row.content}}</span>
+                            <span style="white-space: pre-line;">{{props.row.content}}</span>
                         </template>
                     </el-table-column>
                     <el-table-column prop="id" label="ID" width="60"></el-table-column>
