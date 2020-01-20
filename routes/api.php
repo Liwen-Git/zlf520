@@ -47,4 +47,6 @@ Route::prefix('mini')
         Route::get('/story/list', 'StoryController@list');
         Route::post('/story/add', 'StoryController@add');
         Route::post('/story/edit', 'StoryController@edit');
+
+        Route::post('/local/upload', 'UploadController@upload');
     });
