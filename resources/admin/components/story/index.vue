@@ -57,7 +57,7 @@
                         @current-change="getList"></el-pagination>
             </el-card>
 
-            <el-dialog :visible.sync="showDialog" :title="dialogTitle" :close-on-click-modal="false">
+            <el-dialog :visible.sync="showDialog" :title="dialogTitle" :close-on-click-modal="false" width="40%">
                 <el-form ref="dialogForm" :model="storyData" :rules="storyRules" size="small" label-width="100px">
                     <el-form-item label="日记主人" prop="wx_user_id">
                         <el-select v-model="storyData.wx_user_id" clearable placeholder="选择日记主人">
@@ -77,10 +77,14 @@
                     <el-form-item label="内容" prop="content">
                         <el-input
                                 type="textarea"
-                                :rows="3"
+                                :rows="5"
                                 placeholder="请输入内容"
+                                class="w-295"
                                 v-model="storyData.content">
                         </el-input>
+                    </el-form-item>
+                    <el-form-item label="图片" prop="images">
+                        <image-upload v-model="storyData.images" :action="imageAction" :multiple="true"></image-upload>
                     </el-form-item>
                     <el-form-item>
                         <el-button type="primary" @click="onSubmit" :loading="btnLoading">确 定</el-button>
@@ -114,6 +118,7 @@
                     date: '',
                     wx_user_id: '',
                     content: '',
+                    images: '',
                 },
                 storyRules: {
                     wx_user_id: [
@@ -125,6 +130,8 @@
                 },
 
                 editId: 0,
+
+                imageAction: '/api/local/upload?directory=diary&type=1'
             }
         },
         methods: {
@@ -148,6 +155,7 @@
                     date: '',
                     wx_user_id: '',
                     content: '',
+                    images: '',
                 };
                 this.editId = 0;
                 this.showDialog = true;
@@ -190,6 +198,7 @@
                     date: row.date,
                     wx_user_id: row.wx_user_id,
                     content: row.content,
+                    images: row.images,
                 };
                 this.showDialog = true;
             }

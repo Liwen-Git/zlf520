@@ -32,6 +32,13 @@ class StoryService extends BaseService
         $story->wx_user_id = $data['wx_user_id'];
         $story->content = $data['content'];
         $story->date = $data['date'];
+
+        $images = $data['images'];
+        if(is_array($images)){
+            $images = implode(',', $images);
+        }
+        $story->images = $images;
+
         $story->save();
         return $story;
     }
@@ -41,6 +48,13 @@ class StoryService extends BaseService
         $story = Story::find($data['id']);
         $story->content = $data['content'];
         $story->date = $data['date'];
+
+        $images = $data['images'];
+        if(is_array($images)){
+            $images = implode(',', $images);
+        }
+        $story->images = $images;
+
         $story->save();
 
         return $story;

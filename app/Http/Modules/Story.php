@@ -14,6 +14,7 @@ use Illuminate\Support\Carbon;
  * @property int $id
  * @property int $wx_user_id 微信用户id
  * @property string $content 日记内容
+ * @property string $images 图片
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @method static Builder|Story newModelQuery()

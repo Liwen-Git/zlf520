@@ -45,6 +45,7 @@ class StoryController extends Controller
             'wx_user_id' => request('wx_user_id'),
             'content' => request('content', ''),
             'date' => request('date'),
+            'images' => request('images', ''),
         ];
 
         $story = StoryService::add($data);
@@ -62,6 +63,7 @@ class StoryController extends Controller
             'id' => request('id'),
             'content' => request('content', ''),
             'date' => request('date'),
+            'images' => request('images', ''),
         ];
 
         $story = StoryService::edit($data);
