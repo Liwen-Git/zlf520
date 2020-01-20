@@ -2576,6 +2576,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "story-list",
   data: function data() {
@@ -50712,12 +50722,12 @@ var render = function() {
                     scopedSlots: _vm._u([
                       {
                         key: "default",
-                        fn: function(props) {
+                        fn: function(scope) {
                           return [
                             _c(
                               "span",
                               { staticStyle: { "white-space": "pre-line" } },
-                              [_vm._v(_vm._s(props.row.content))]
+                              [_vm._v(_vm._s(scope.row.content))]
                             )
                           ]
                         }
@@ -50730,7 +50740,7 @@ var render = function() {
                   }),
                   _vm._v(" "),
                   _c("el-table-column", {
-                    attrs: { prop: "date", label: "日期", width: "150" }
+                    attrs: { prop: "date", label: "日期", width: "120" }
                   }),
                   _vm._v(" "),
                   _c("el-table-column", {
@@ -50756,7 +50766,7 @@ var render = function() {
                     scopedSlots: _vm._u([
                       {
                         key: "default",
-                        fn: function(props) {
+                        fn: function(scope) {
                           return [
                             _c(
                               "span",
@@ -50767,8 +50777,35 @@ var render = function() {
                                   "text-overflow": "ellipsis"
                                 }
                               },
-                              [_vm._v(_vm._s(props.row.content))]
+                              [_vm._v(_vm._s(scope.row.content))]
                             )
+                          ]
+                        }
+                      }
+                    ])
+                  }),
+                  _vm._v(" "),
+                  _c("el-table-column", {
+                    attrs: { prop: "images", label: "图片" },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "default",
+                        fn: function(scope) {
+                          return [
+                            scope.row.images
+                              ? _c("el-image", {
+                                  staticStyle: {
+                                    width: "100px",
+                                    height: "100px"
+                                  },
+                                  attrs: {
+                                    src: scope.row.images.split(",")[0],
+                                    "preview-src-list": scope.row.images.split(
+                                      ","
+                                    )
+                                  }
+                                })
+                              : _vm._e()
                           ]
                         }
                       }

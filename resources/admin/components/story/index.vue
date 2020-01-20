@@ -24,12 +24,12 @@
                 </el-form>
                 <el-table :data="list" v-loading="tableLoading" stripe>
                     <el-table-column type="expand">
-                        <template slot-scope="props">
-                            <span style="white-space: pre-line;">{{props.row.content}}</span>
+                        <template slot-scope="scope">
+                            <span style="white-space: pre-line;">{{scope.row.content}}</span>
                         </template>
                     </el-table-column>
                     <el-table-column prop="id" label="ID" width="60"></el-table-column>
-                    <el-table-column prop="date" label="日期" width="150"></el-table-column>
+                    <el-table-column prop="date" label="日期" width="120"></el-table-column>
                     <el-table-column prop="wx_user_id" label="日记主人">
                         <template slot-scope="scope">
                             <span v-if="scope.row.wx_user_id === 1">李子语录</span>
@@ -38,8 +38,18 @@
                         </template>
                     </el-table-column>
                     <el-table-column prop="content" label="日记内容">
-                        <template slot-scope="props">
-                            <span style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">{{props.row.content}}</span>
+                        <template slot-scope="scope">
+                            <span style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">{{scope.row.content}}</span>
+                        </template>
+                    </el-table-column>
+                    <el-table-column prop="images" label="图片">
+                        <template slot-scope="scope">
+                            <el-image
+                                    v-if="scope.row.images"
+                                    style="width: 100px; height: 100px"
+                                    :src="scope.row.images.split(',')[0]"
+                                    :preview-src-list="scope.row.images.split(',')">
+                            </el-image>
                         </template>
                     </el-table-column>
                     <el-table-column prop="created_at" label="创建时间"></el-table-column>
