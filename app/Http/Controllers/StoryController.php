@@ -70,4 +70,15 @@ class StoryController extends Controller
 
         return Result::success($story);
     }
+
+    public function getStoryById()
+    {
+        $this->validate(request(), [
+            'id' => 'required',
+        ]);
+        $id = request('id');
+        $story = StoryService::getStoryById($id);
+
+        return Result::success($story);
+    }
 }

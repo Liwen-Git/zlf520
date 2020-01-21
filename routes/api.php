@@ -45,6 +45,7 @@ Route::prefix('mini')
     ->group(function () {
         Route::post('/story/check', 'StoryController@checkPassword');
         Route::get('/story/list', 'StoryController@list');
+        Route::get('/story/one', 'StoryController@getStoryById');
         Route::post('/story/add', 'StoryController@add');
         Route::post('/story/edit', 'StoryController@edit');
 

@@ -59,4 +59,10 @@ class StoryService extends BaseService
 
         return $story;
     }
+
+    public static function getStoryById($id)
+    {
+        $story = Story::find($id);
+        return $story;
+    }
 }
