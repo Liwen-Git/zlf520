@@ -39,6 +39,7 @@ Route::middleware('admin')
         Route::get('/story/list', 'StoryController@list');
         Route::post('/story/add', 'StoryController@add');
         Route::post('/story/edit', 'StoryController@edit');
+        Route::post('/story/delete', 'StoryController@deleteStoryById');
     });
 
 Route::prefix('mini')

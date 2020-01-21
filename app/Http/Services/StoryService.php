@@ -65,4 +65,9 @@ class StoryService extends BaseService
         $story = Story::find($id);
         return $story;
     }
+
+    public static function delStoryById($id)
+    {
+        Story::destroy($id);
+    }
 }

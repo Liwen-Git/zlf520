@@ -81,4 +81,15 @@ class StoryController extends Controller
 
         return Result::success($story);
     }
+
+    public function deleteStoryById()
+    {
+        $this->validate(request(), [
+            'id' => 'required',
+        ]);
+        $id = request('id');
+        StoryService::delStoryById($id);
+
+        return Result::success();
+    }
 }

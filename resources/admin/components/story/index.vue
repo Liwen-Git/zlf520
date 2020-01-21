@@ -30,7 +30,7 @@
                     </el-table-column>
                     <el-table-column prop="id" label="ID" width="60"></el-table-column>
                     <el-table-column prop="date" label="日期" width="120"></el-table-column>
-                    <el-table-column prop="wx_user_id" label="日记主人">
+                    <el-table-column prop="wx_user_id" label="日记主人" width="100">
                         <template slot-scope="scope">
                             <span v-if="scope.row.wx_user_id === 1">李子语录</span>
                             <span v-else-if="scope.row.wx_user_id === 2">FeVer物语</span>
@@ -55,7 +55,8 @@
                     <el-table-column prop="created_at" label="创建时间"></el-table-column>
                     <el-table-column label="操作" width="100">
                         <template slot-scope="scope">
-                            <el-button type="danger" size="mini" @click="editStory(scope.row)">编辑</el-button>
+                            <el-button type="primary" icon="el-icon-edit" circle size="mini" @click="editStory(scope.row)"></el-button>
+                            <el-button type="danger" icon="el-icon-delete" circle size="mini" @click="deleteStory(scope.row)"></el-button>
                         </template>
                     </el-table-column>
                 </el-table>
@@ -211,6 +212,28 @@
                     images: row.images,
                 };
                 this.showDialog = true;
+            },
+            deleteStory(row) {
+                this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    api.post('/story/delete', {id: row.id}).then(() => {
+                        this.getList();
+                        this.$message({
+                            type: 'success',
+                            message: '删除成功!'
+                        });
+                    }).catch(() => {
+                        this.$message.error('删除失败!');
+                    });
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消删除!'
+                    });
+                });
             }
         },
         created() {
