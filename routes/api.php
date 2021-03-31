@@ -52,3 +52,8 @@ Route::prefix('mini')
 
         Route::post('/local/upload', 'UploadController@upload');
     });
+
+Route::post('/futian/hospital/reg', 'FutianHospital@registered');
+Route::get('/futian/hospital/department_list', 'FutianHospital@getDepartmentList');
+Route::get('/futian/hospital/doctor', 'FutianHospital@getDoctor');
+Route::get('/futian/hospital/treatment_time', 'FutianHospital@getTreatmentTimeAndRemainingTimes');

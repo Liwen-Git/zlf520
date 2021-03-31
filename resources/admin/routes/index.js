@@ -12,6 +12,9 @@ import QiniuPreview from '../components/qiniu/preview'
 import BookkeepingType from '../components/miniprogram/bookkeeping/type'
 import StoryList from '../components/story/index'
 
+// 福田中医院 挂号
+import FutianHospitalReg from '../components/hospital/index'
+
 /**
  *
  */
@@ -36,6 +39,15 @@ const routes = [
         children: [
             {path: 'mini/bookkeeping/type', component: BookkeepingType, name: 'bookkeeping-type'},
             {path: 'story/list', component: StoryList, name: 'story-list'},
+        ]
+    },
+
+    // 福田中医院 挂号
+    {
+        path: '/',
+        component: Home,
+        children: [
+            {path: 'futian/hospital', component: FutianHospitalReg, name: 'futian-hospital'}
         ]
     },
 

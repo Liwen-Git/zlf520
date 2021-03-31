@@ -24,6 +24,10 @@
                             </el-submenu>-->
                             <el-menu-item index="/story/list">日记</el-menu-item>
                         </el-submenu>
+                        <el-submenu index="4">
+                            <template slot="title">福田中医院</template>
+                            <el-menu-item index="/futian/hospital">挂号</el-menu-item>
+                        </el-submenu>
                         <el-submenu :index="user.name" style="float:right;">
                             <template slot="title">{{user.name}}</template>
                             <el-menu-item @click="logout">退出</el-menu-item>
