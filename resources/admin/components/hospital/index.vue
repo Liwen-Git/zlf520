@@ -1,8 +1,9 @@
 <template>
     <div>
         <el-row style="margin-bottom: 20px;">
-            挂号时间：
+            <el-tag type="warning" style="margin-bottom: 5px;">挂号时间</el-tag>
             <el-date-picker
+                    size="small"
                     v-model="dateRangeVal"
                     type="daterange"
                     format="yyyy - MM - dd "
@@ -25,7 +26,7 @@
                 </el-table>
             </el-col>
             <el-col :span="6">
-                <el-table :data="doctorList" border :highlight-current-row="true" v-loading="doctorTableLoading">
+                <el-table :data="doctorList" border :highlight-current-row="true" @selection-change="handleSelectionChange" v-loading="doctorTableLoading">
                     <el-table-column type="selection" width="55"></el-table-column>
                     <el-table-column prop="doctorName" :label="doctorTableHeader">
                         <template slot-scope="scope">
@@ -86,7 +87,14 @@
                 </div>
             </el-col>
             <el-col :span="6">
-
+                <div>
+                    <el-tag type="warning" style="margin-bottom: 15px;">挂号费用设置</el-tag>
+                    <el-input-number :min="0" v-model="setFee" size="small"></el-input-number>
+                </div>
+                <div>
+                    <el-button type="success" @click="startSearch">开始查询</el-button>
+                    <el-button type="danger" @click="stopSearch">停止查询</el-button>
+                </div>
             </el-col>
         </el-row>
     </div>
@@ -114,6 +122,9 @@
                 treatmentTimeMorningList: [],
                 treatmentTimeAfternoonList: [],
                 treatmentFee: 0,
+
+                doctorIds: [],
+                setFee: 0,
             }
         },
         methods: {
@@ -181,6 +192,31 @@
                     this.treatmentLoading = false;
                 }).catch(() => {
                     this.treatmentLoading = false;
+                })
+            },
+            handleSelectionChange(val) {
+                let arr = [];
+                val.forEach(function (item) {
+                    arr.push(item.doctorId);
+                });
+                this.doctorIds = arr;
+            },
+            startSearch() {
+                let params = {
+                    dept_id: this.currentDepartment.sectionCode,
+                    doctor_ids: this.doctorIds,
+                    start_date: this.dateRangeVal[0],
+                    end_date: this.dateRangeVal[1],
+                    fee: this.setFee
+                };
+                this.$message.success('开始自动查询');
+                api.post('/futian/hospital/reg', params).then(() => {
+                    this.$message.success('自动查询结束');
+                })
+            },
+            stopSearch() {
+                api.post('/futian/hospital/stop/reg').then(() => {
+                    this.$message.success('成功停止');
                 })
             }
         },

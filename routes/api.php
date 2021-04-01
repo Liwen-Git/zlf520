@@ -40,6 +40,13 @@ Route::middleware('admin')
         Route::post('/story/add', 'StoryController@add');
         Route::post('/story/edit', 'StoryController@edit');
         Route::post('/story/delete', 'StoryController@deleteStoryById');
+
+        // 福田中医院
+        Route::post('/futian/hospital/reg', 'FutianHospital@registered');
+        Route::post('/futian/hospital/stop/reg', 'FutianHospital@stopAutoReg');
+        Route::get('/futian/hospital/department_list', 'FutianHospital@getDepartmentList');
+        Route::get('/futian/hospital/doctor', 'FutianHospital@getDoctor');
+        Route::get('/futian/hospital/treatment_time', 'FutianHospital@getTreatmentTimeAndRemainingTimes');
     });
 
 Route::prefix('mini')
@@ -52,8 +59,3 @@ Route::prefix('mini')
 
         Route::post('/local/upload', 'UploadController@upload');
     });
-
-Route::post('/futian/hospital/reg', 'FutianHospital@registered');
-Route::get('/futian/hospital/department_list', 'FutianHospital@getDepartmentList');
-Route::get('/futian/hospital/doctor', 'FutianHospital@getDoctor');
-Route::get('/futian/hospital/treatment_time', 'FutianHospital@getTreatmentTimeAndRemainingTimes');

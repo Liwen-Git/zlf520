@@ -7,8 +7,15 @@ namespace App\Http\Controllers;
 use App\Exceptions\BaseResponseException;
 use App\Http\Services\BaseService;
 use App\Result;
+use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\GuzzleException;
+use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
+use Psr\Http\Message\ResponseInterface;
 
 class FutianHospital extends Controller
 {
@@ -28,8 +35,8 @@ class FutianHospital extends Controller
      * @param $method
      * @param $uri
      * @param array $data
-     * @return mixed|\Psr\Http\Message\ResponseInterface
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return mixed|ResponseInterface
+     * @throws GuzzleException
      */
     public static function baseRequest($method, $uri, $data = [])
     {
@@ -51,14 +58,117 @@ class FutianHospital extends Controller
      */
     public function registered()
     {
-        BaseService::sc_send('有号了!');
+        set_time_limit(0); //设置执行最长时间，0为无限制。
+
+        $doctorIds = request('doctor_ids', []);
+        $startDate = request('start_date');
+        $endDate = request('end_date');
+        $deptId = request('dept_id');
+        $fee = request('fee', 0);
+        if (!$startDate || !$endDate || !$deptId || empty($doctorIds)) {
+            throw new BaseResponseException('自动刷号请求 参数错误');
+        }
+
+        $autoMachine = function ($doctorIds, $startDate, $endDate, $deptId, $fee) {
+            $dateArr = [];
+            while (true) {
+                $dateArr[] = $startDate;
+                if ($startDate == $endDate) {
+                    break;
+                }
+                $startDate = date('Y-m-d', strtotime($startDate) + 24 * 60 * 60);
+            }
+
+            $flag = 0;
+            foreach ($dateArr as $date) {
+                foreach ($doctorIds as $doctorId) {
+                    $data = [
+                        'form_params' => [
+                            'context' => 1,
+                            'openId' => 'oCtVwuE0SLlfKphbP_tLA-YXKeEg',
+                            'deptId' => $deptId,
+                            'doctorId' => $doctorId,
+                            'startDate' => $date,
+                            'endDate' => $date
+                        ]
+                    ];
+                    try {
+                        Log::info('请求参数:', $data);
+                        $response = self::baseRequest('POST', '/szftzyy/rest/mu011', $data);
+                        if (is_array($response) && $response['success'] == true && !empty($response['obj'])) {
+                            Log::info('响应：', $response);
+                            foreach ($response['obj'] as $obj) {
+                                if ($fee == 0 || $obj['treatFee'] <= $fee) {
+                                    foreach ($obj['Mu012'] as $item) {
+                                        if ($item['regLeaveCount'] > 0) {
+                                            $deptName = $obj['deptName'];
+                                            $doctorName = $obj['doctorName'];
+                                            $doctorDec = $obj['doctorTitle'];
+                                            $dateTime = $obj['regDate']. ' '. $item['startTime']. '-'. $item['endTime'];
+                                            $regLeaveCount = $item['regLeaveCount'];
+                                            $treatFee = $obj['treatFee'];
+
+                                            $title = '深圳福田中医院';
+                                            $desp = <<<XML
+## 科室
+$deptName
+## 医生
+$doctorName
+> $doctorDec
+
+## 时间
+$dateTime
+## 余号数量
+$regLeaveCount
+## 挂号费
+$treatFee
+XML;
+
+                                            Log::info('发送企业微信：'.$desp);
+                                            BaseService::sc_send($title, $desp);
+
+                                            ++$flag;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } catch (Exception $exception) {
+                        continue;
+                    }
+                }
+            }
+            if ($flag > 0) {
+                Cache::forget('auto_registered_key');
+            }
+        };
+
+        Cache::forever('auto_registered_key', 1);
+        while (true) {
+            if (!Cache::get('auto_registered_key')) {
+                break;
+            }
+
+            $autoMachine($doctorIds, $startDate, $endDate, $deptId, $fee);
+        }
+
+        return Result::success();
+    }
+
+    /**
+     * 停止刷号
+     * @return ResponseFactory|Response
+     */
+    public function stopAutoReg()
+    {
+        Cache::forget('auto_registered_key');
         return Result::success();
     }
 
     /**
      * 科室列表
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return ResponseFactory|Response
+     * @throws GuzzleException
      */
     public function getDepartmentList()
     {
@@ -72,8 +182,8 @@ class FutianHospital extends Controller
 
     /**
      * 获取医生列表
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return ResponseFactory|Response
+     * @throws GuzzleException
      */
     public function getDoctor()
     {
@@ -96,8 +206,8 @@ class FutianHospital extends Controller
 
     /**
      * 获取就诊时间和剩余挂号数量
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return ResponseFactory|Response
+     * @throws GuzzleException
      */
     public function getTreatmentTimeAndRemainingTimes()
     {
