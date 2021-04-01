@@ -58,7 +58,8 @@ class FutianHospital extends Controller
      */
     public function registered()
     {
-        set_time_limit(0); //设置执行最长时间，0为无限制。
+        set_time_limit(0); //设置执行最长时间，0为无限制
+//        ignore_user_abort(true);  //关闭浏览器，服务器也能自动执行
 
         $doctorIds = request('doctor_ids', []);
         $startDate = request('start_date');
